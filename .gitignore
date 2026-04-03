@@ -27,16 +27,13 @@ ipch/
 # JetBrains (Rider/CLion)
 .idea/
 
-# Arena runtime (server binaries, not our code)
-Arena/
+# Arena storehouse (large runtime assets)
+Arena/Run_Windows/Storehouse/
 
 # Tool configs and workflow
 .serena/
 .spec-workflow/
 .claude/
-
-# Arena storehouse
-Arena/Run_Windows/Storehouse/
 
 # OS files
 Thumbs.db
