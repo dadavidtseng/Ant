@@ -1,0 +1,44 @@
+# Build outputs
+x64/
+Debug/
+Release/
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.obj
+*.log
+*.tlog/
+*.iobj
+*.ipdb
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.opendb
+ipch/
+
+# JetBrains (Rider/CLion)
+.idea/
+
+# Arena runtime (server binaries, not our code)
+Arena/
+
+# Tool configs and workflow
+.serena/
+.spec-workflow/
+.claude/
+
+# Arena storehouse
+Arena/Run_Windows/Storehouse/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

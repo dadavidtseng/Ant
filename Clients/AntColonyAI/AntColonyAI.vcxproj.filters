@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Colony">
+      <UniqueIdentifier>{06966975-2f1b-46db-b2ab-b64726a4bb51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{e3e37e4a-2ec0-4a30-8d21-8083ecad0d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API">
+      <UniqueIdentifier>{66460945-fc2a-4435-a831-981a913e9918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documentation">
+      <UniqueIdentifier>{a3dedfd8-99f8-45d7-81c8-ced9c3e2d002}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Arena\Code\Game\ArenaPlayerInterface.hpp">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="Ant.hpp">
+      <Filter>Colony</Filter>
+    </ClInclude>
+    <ClInclude Include="Colony.hpp">
+      <Filter>Colony</Filter>
+    </ClInclude>
+    <ClInclude Include="HeatMap.hpp">
+      <Filter>Colony</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.hpp">
+      <Filter>Colony</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArenaPlayerImplementation.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="Ant.cpp">
+      <Filter>Colony</Filter>
+    </ClCompile>
+    <ClCompile Include="Colony.cpp">
+      <Filter>Colony</Filter>
+    </ClCompile>
+    <ClCompile Include="HeatMap.cpp">
+      <Filter>Colony</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Colony</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Setup.md">
+      <Filter>Documentation</Filter>
+    </None>
+  </ItemGroup>
+</Project>
