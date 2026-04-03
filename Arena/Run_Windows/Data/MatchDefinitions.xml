@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<MatchDefinitions>
+	<!-- Default values in code if not set are shown in "Default" match definition -->
+	<MatchDefinition
+		name="Default"
+		minTurnTime="0.060"
+		mapSizeOverride="0"
+		maxPopulation="200"
+		
+		startingNutrientsPerPlayer="2000"
+		nutientsEarnedPerFoodEatenByQueen="1000"
+		nutrientLossPerQueenSuffocation="10000"
+		nutrientLossPerAttackerStrength="10"
+		
+		startingScouts="2"
+		startingWorkers="2"
+		startingSoldiers="1"
+		startingQueens="1"
+		
+		turnsUntilSuddenDeath="1500"
+		suddenDeathTurnsPerUpkeepIncrease="2"
+		nutrientPenaltyPerFault="0"
+		agentsKilledPerFault="0"
+		
+		foodCarryExhaustPenalty="1"
+		tileCarryExhaustPenalty="1"
+	/>
+
+	<MatchDefinition
+		 name="Debug"
+		 minTurnTime="0.100"
+		 mapSizeOverride="0"
+		 maxPopulation="200"
+		
+		 startingNutrientsPerPlayer="1000000"
+		 nutientsEarnedPerFoodEatenByQueen="1000"
+		 nutrientLossPerAttackerStrength="10"
+		 nutrientLossPerQueenSuffocation="10000"
+		
+		 startingScouts="0"
+		 startingWorkers="1"
+		 startingSoldiers="0"
+		 startingQueens="1"
+		
+		 turnsUntilSuddenDeath="1000"
+		 suddenDeathTurnsPerUpkeepIncrease="10"
+		 nutrientPenaltyPerFault="0"
+		 agentsKilledPerFault="0"
+		
+		 foodCarryExhaustPenalty="1"
+		 tileCarryExhaustPenalty="1"
+	/>
+
+	<MatchDefinition
+		name="Fast"
+		minTurnTime="0.001"
+		suddenDeathTurnsPerUpkeepIncrease="1"
+		nutrientPenaltyPerFault="0"
+		agentsKilledPerFault="1"
+	/>
+
+	<MatchDefinition
+		name="Final"
+		minTurnTime="0.030"
+		maxPopulation="200"
+		suddenDeathTurnsPerUpkeepIncrease="1"
+		nutrientPenaltyPerFault="0"
+		agentsKilledPerFault="1"
+	/>
+</MatchDefinitions>
