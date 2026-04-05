@@ -52,9 +52,9 @@ public:
 private:
 	struct TileInfo
 	{
-		eTileType type         = TILE_TYPE_UNSEEN;
-		bool      hasFood      = false;
-		int       lastSeenTurn = -1;
+		eTileType m_type         = TILE_TYPE_UNSEEN;
+		bool      m_hasFood      = false;
+		int       m_lastSeenTurn = -1;
 	};
 
 	short         m_width = 0;
@@ -73,7 +73,7 @@ private:
 	// BFS helper
 	struct BFSNode
 	{
-		short      x, y;
-		eOrderCode firstMove;
+		short      m_x, m_y;
+		eOrderCode m_firstMove;
 	};
 };
