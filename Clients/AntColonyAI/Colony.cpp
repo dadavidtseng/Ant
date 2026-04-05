@@ -4,7 +4,7 @@
 // Construction / Destruction
 //-----------------------------------------------------------------------------------------------
 
-Colony::Colony(const StartupInfo& info)
+Colony::Colony(StartupInfo const& info)
 	: m_matchInfo(info.matchInfo)
 	, m_playerInfo(info.yourPlayerInfo)
 	, m_currentNutrients(info.matchInfo.startingNutrients)
@@ -27,7 +27,7 @@ Colony::~Colony()
 // EXE Thread Methods (must return sub-1ms)
 //-----------------------------------------------------------------------------------------------
 
-void Colony::OnReceiveTurnState(const ArenaTurnStateForPlayer& state)
+void Colony::OnReceiveTurnState(ArenaTurnStateForPlayer const& state)
 {
 	// memcpy the entire state into the write buffer, then publish
 	ArenaTurnStateForPlayer& writeBuffer = m_stateBuffer.GetWriteBuffer();
@@ -42,7 +42,7 @@ bool Colony::OnTurnOrderRequest(int turnNumber, PlayerTurnOrders* out)
 	if (!m_ordersBuffer.TrySwapRead())
 		return false; // AI thread hasn't finished yet, server may ask again
 
-	const PlayerTurnOrders& readBuffer = m_ordersBuffer.GetReadBuffer();
+	PlayerTurnOrders const& readBuffer = m_ordersBuffer.GetReadBuffer();
 	memcpy(out, &readBuffer, sizeof(PlayerTurnOrders));
 	return true;
 }
@@ -78,7 +78,7 @@ void Colony::WorkerLoop(int threadIndex, std::atomic<bool>* isQuitting)
 		if (!m_stateBuffer.TrySwapRead())
 			continue;
 
-		const ArenaTurnStateForPlayer& state = m_stateBuffer.GetReadBuffer();
+		ArenaTurnStateForPlayer const& state = m_stateBuffer.GetReadBuffer();
 
 		// AI pipeline
 		UpdateGameState(state);
@@ -93,7 +93,7 @@ void Colony::WorkerLoop(int threadIndex, std::atomic<bool>* isQuitting)
 // AI Pipeline
 //-----------------------------------------------------------------------------------------------
 
-void Colony::UpdateGameState(const ArenaTurnStateForPlayer& state)
+void Colony::UpdateGameState(ArenaTurnStateForPlayer const& state)
 {
 	m_currentTurn      = state.turnNumber;
 	m_currentNutrients = state.currentNutrients;
@@ -257,7 +257,7 @@ eOrderCode Colony::GetBirthOrder() const
 //-----------------------------------------------------------------------------------------------
 AgentID Colony::FindSuicideCandidate() const
 {
-	const Ant* pool = m_antManager.GetAntPool();
+	Ant const* pool = m_antManager.GetAntPool();
 	AgentID bestID = 0;
 	int bestPriority = -1;
 

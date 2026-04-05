@@ -17,11 +17,11 @@
 class Colony
 {
 public:
-	Colony(const StartupInfo& info);
+	Colony(StartupInfo const& info);
 	~Colony();
 
 	// Called by ArenaPlayerImplementation (EXE thread, must return sub-1ms)
-	void OnReceiveTurnState(const ArenaTurnStateForPlayer& state);
+	void OnReceiveTurnState(ArenaTurnStateForPlayer const& state);
 	bool OnTurnOrderRequest(int turnNumber, PlayerTurnOrders* out);
 
 	// Called by ArenaPlayerImplementation (worker thread)
@@ -32,8 +32,8 @@ public:
 	short GetQueenY() const { return m_queenY; }
 	int   GetCurrentNutrients() const { return m_currentNutrients; }
 	int   GetCurrentTurn() const { return m_currentTurn; }
-	const MatchInfo&     GetMatchInfo() const { return m_matchInfo; }
-	const AgentTypeInfo& GetAgentTypeInfo(eAgentType type) const { return m_matchInfo.agentTypeInfos[type]; }
+	MatchInfo const&     GetMatchInfo() const { return m_matchInfo; }
+	AgentTypeInfo const& GetAgentTypeInfo(eAgentType type) const { return m_matchInfo.agentTypeInfos[type]; }
 
 private:
 	// Subsystems (owned by value)
@@ -60,7 +60,7 @@ private:
 	TripleBuffer<PlayerTurnOrders>        m_ordersBuffer;
 
 	// AI pipeline (called from WorkerLoop on thread 0)
-	void UpdateGameState(const ArenaTurnStateForPlayer& state);
+	void UpdateGameState(ArenaTurnStateForPlayer const& state);
 	void ManageEconomy();
 	void AssignRoles();
 	void GenerateAntOrders();
