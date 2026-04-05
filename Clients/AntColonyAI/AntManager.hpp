@@ -18,32 +18,32 @@ public:
 	AntManager();
 
 	// State sync from ArenaTurnStateForPlayer
-	void UpdateFromTurnState(const ArenaTurnStateForPlayer& state);
+	void UpdateFromTurnState(ArenaTurnStateForPlayer const& state);
 
 	// Queries
 	Ant*       FindAnt(AgentID id);
-	const Ant* FindAnt(AgentID id) const;
+	Ant const* FindAnt(AgentID id) const;
 	Ant*       GetFirstLivingQueen();
 	int        GetLivingCount() const { return m_livingCount; }
 	int        GetCountByType(eAgentType type) const;
-	int        GetTotalUpkeep(const AgentTypeInfo agentTypeInfos[NUM_AGENT_TYPES]) const;
+	int        GetTotalUpkeep(AgentTypeInfo const agentTypeInfos[NUM_AGENT_TYPES]) const;
 
 	// Iterators
 	template<typename Func> void ForEachLivingAnt(Func&& fn);
 	template<typename Func> void ForEachLivingAntOfType(eAgentType type, Func&& fn);
 
 	// Order generation — fills PlayerTurnOrders
-	void GenerateAllOrders(const GameMap& map, const Colony& colony, PlayerTurnOrders* out);
+	void GenerateAllOrders(GameMap const& map, Colony const& colony, PlayerTurnOrders* out);
 
 	// Role assignment (called by Colony)
-	void AssignRoles(const GameMap& map, int currentNutrients, const MatchInfo& matchInfo);
+	void AssignRoles(GameMap const& map, int currentNutrients, MatchInfo const& matchInfo);
 
 	// Enemy tracking
-	int                  GetEnemyCount() const { return m_numEnemies; }
-	const ObservedAgent* GetEnemies() const { return m_enemies; }
+	int                    GetEnemyCount() const { return m_numEnemies; }
+	ObservedAgent const*   GetEnemies() const { return m_enemies; }
 
 	// Direct pool access (for iteration)
-	const Ant* GetAntPool() const { return m_ants; }
+	Ant const* GetAntPool() const { return m_ants; }
 
 private:
 	Ant m_ants[MAX_AGENTS_PER_PLAYER];
@@ -58,10 +58,10 @@ private:
 	int FindFreeSlot() const;
 
 	// Role assignment helpers
-	void AssignScoutRoles(const GameMap& map);
-	void AssignWorkerRoles(const GameMap& map, int nutrients, const MatchInfo& matchInfo);
-	void AssignSoldierRoles(const GameMap& map);
-	void AssignQueenRoles(int nutrients, const MatchInfo& matchInfo);
+	void AssignScoutRoles(GameMap const& map);
+	void AssignWorkerRoles(GameMap const& map, int nutrients, MatchInfo const& matchInfo);
+	void AssignSoldierRoles(GameMap const& map);
+	void AssignQueenRoles(int nutrients, MatchInfo const& matchInfo);
 };
 
 //-----------------------------------------------------------------------------------------------

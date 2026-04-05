@@ -14,12 +14,12 @@ class GameMap
 {
 public:
 	GameMap();
-	void Initialize(short mapWidth, const AgentTypeInfo agentTypeInfos[NUM_AGENT_TYPES]);
+	void Initialize(short mapWidth, AgentTypeInfo const agentTypeInfos[NUM_AGENT_TYPES]);
 
 	// State update from ArenaTurnStateForPlayer
 	void UpdateFromObservation(
-		const eTileType observedTiles[MAX_ARENA_TILES],
-		const bool tilesThatHaveFood[MAX_ARENA_TILES],
+		eTileType const observedTiles[MAX_ARENA_TILES],
+		bool const tilesThatHaveFood[MAX_ARENA_TILES],
 		int turnNumber
 	);
 
@@ -44,7 +44,7 @@ public:
 
 	// Exploration scoring
 	HeatMap&       GetExplorationHeatMap() { return m_explorationHeat; }
-	const HeatMap& GetExplorationHeatMap() const { return m_explorationHeat; }
+	HeatMap const& GetExplorationHeatMap() const { return m_explorationHeat; }
 	void           UpdateExplorationHeat(int turnNumber);
 
 	short GetWidth() const { return m_width; }

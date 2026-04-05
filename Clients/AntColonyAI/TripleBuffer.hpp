@@ -36,7 +36,7 @@ public:
 		return true;
 	}
 
-	const T& GetReadBuffer() const { return m_buffers[m_readIdx]; }
+	T const& GetReadBuffer() const { return m_buffers[m_readIdx]; }
 
 	// Signaling
 	void WaitForNewData()

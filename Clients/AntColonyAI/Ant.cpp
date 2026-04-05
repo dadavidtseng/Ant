@@ -3,7 +3,7 @@
 #include "Colony.hpp"
 
 //-----------------------------------------------------------------------------------------------
-void Ant::UpdateFromReport(const AgentReport& report)
+void Ant::UpdateFromReport(AgentReport const& report)
 {
 	m_id                        = report.agentID;
 	m_type                      = report.type;
@@ -45,7 +45,7 @@ static eOrderCode GetDigOrderForDirection(short fromX, short fromY, short toX, s
 }
 
 //-----------------------------------------------------------------------------------------------
-AgentOrder Ant::DecideOrder(const GameMap& map, const Colony& colony) const
+AgentOrder Ant::DecideOrder(GameMap const& map, Colony const& colony) const
 {
 	AgentOrder order;
 	order.agentID = m_id;
@@ -72,7 +72,7 @@ AgentOrder Ant::DecideOrder(const GameMap& map, const Colony& colony) const
 //-----------------------------------------------------------------------------------------------
 // Queen: hold position; birth decisions are handled by Colony economy logic
 //-----------------------------------------------------------------------------------------------
-eOrderCode Ant::DecideQueenOrder(const GameMap& map, const Colony& colony) const
+eOrderCode Ant::DecideQueenOrder(GameMap const& map, Colony const& colony) const
 {
 	(void)map;
 	(void)colony;
@@ -82,7 +82,7 @@ eOrderCode Ant::DecideQueenOrder(const GameMap& map, const Colony& colony) const
 //-----------------------------------------------------------------------------------------------
 // Explorer: move toward nearest unexplored frontier tile
 //-----------------------------------------------------------------------------------------------
-eOrderCode Ant::DecideExplorerOrder(const GameMap& map) const
+eOrderCode Ant::DecideExplorerOrder(GameMap const& map) const
 {
 	// If carrying dirt from a previous dig, drop it
 	if (IsCarryingDirt())
@@ -111,7 +111,7 @@ eOrderCode Ant::DecideExplorerOrder(const GameMap& map) const
 //-----------------------------------------------------------------------------------------------
 // Gatherer: move to known food, pick it up
 //-----------------------------------------------------------------------------------------------
-eOrderCode Ant::DecideGathererOrder(const GameMap& map) const
+eOrderCode Ant::DecideGathererOrder(GameMap const& map) const
 {
 	// If already carrying food, hold (AntManager should reassign to Deliverer)
 	if (IsCarryingFood())
@@ -160,7 +160,7 @@ eOrderCode Ant::DecideGathererOrder(const GameMap& map) const
 //-----------------------------------------------------------------------------------------------
 // Deliverer: carry food back to queen, drop it
 //-----------------------------------------------------------------------------------------------
-eOrderCode Ant::DecideDelivererOrder(const GameMap& map, const Colony& colony) const
+eOrderCode Ant::DecideDelivererOrder(GameMap const& map, Colony const& colony) const
 {
 	if (!IsCarryingFood())
 		return ORDER_HOLD;
@@ -186,7 +186,7 @@ eOrderCode Ant::DecideDelivererOrder(const GameMap& map, const Colony& colony) c
 //-----------------------------------------------------------------------------------------------
 // Digger: move to dig target, dig adjacent dirt
 //-----------------------------------------------------------------------------------------------
-eOrderCode Ant::DecideDiggerOrder(const GameMap& map) const
+eOrderCode Ant::DecideDiggerOrder(GameMap const& map) const
 {
 	if (IsCarryingDirt())
 		return ORDER_DROP_CARRIED_OBJECT;
@@ -227,7 +227,7 @@ eOrderCode Ant::DecideDiggerOrder(const GameMap& map) const
 //-----------------------------------------------------------------------------------------------
 // Guard: stay near queen
 //-----------------------------------------------------------------------------------------------
-eOrderCode Ant::DecideGuardOrder(const GameMap& map, const Colony& colony) const
+eOrderCode Ant::DecideGuardOrder(GameMap const& map, Colony const& colony) const
 {
 	short qx = colony.GetQueenX();
 	short qy = colony.GetQueenY();

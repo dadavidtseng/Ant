@@ -46,8 +46,8 @@ public:
 	short               m_targetY = -1;
 
 	// Methods
-	void       UpdateFromReport(const AgentReport& report);
-	AgentOrder DecideOrder(const GameMap& map, const Colony& colony) const;
+	void       UpdateFromReport(AgentReport const& report);
+	AgentOrder DecideOrder(GameMap const& map, Colony const& colony) const;
 	void       AssignRole(AntRole newRole, short tgtX = -1, short tgtY = -1);
 
 	bool IsExhausted() const    { return m_exhaustion > 0; }
@@ -56,10 +56,10 @@ public:
 
 private:
 	// Role-specific order logic (called from DecideOrder)
-	eOrderCode DecideQueenOrder(const GameMap& map, const Colony& colony) const;
-	eOrderCode DecideExplorerOrder(const GameMap& map) const;
-	eOrderCode DecideGathererOrder(const GameMap& map) const;
-	eOrderCode DecideDelivererOrder(const GameMap& map, const Colony& colony) const;
-	eOrderCode DecideDiggerOrder(const GameMap& map) const;
-	eOrderCode DecideGuardOrder(const GameMap& map, const Colony& colony) const;
+	eOrderCode DecideQueenOrder(GameMap const& map, Colony const& colony) const;
+	eOrderCode DecideExplorerOrder(GameMap const& map) const;
+	eOrderCode DecideGathererOrder(GameMap const& map) const;
+	eOrderCode DecideDelivererOrder(GameMap const& map, Colony const& colony) const;
+	eOrderCode DecideDiggerOrder(GameMap const& map) const;
+	eOrderCode DecideGuardOrder(GameMap const& map, Colony const& colony) const;
 };

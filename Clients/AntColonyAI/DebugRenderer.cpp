@@ -14,7 +14,7 @@ void DebugRenderer::Initialize(DebugInterface* debugInterface, Color8 playerColo
 // Core Debug Interface Wrappers
 //-----------------------------------------------------------------------------------------------
 
-void DebugRenderer::LogText(const char* format, ...)
+void DebugRenderer::LogText(char const* format, ...)
 {
 	if (!m_debug || !m_debug->LogText)
 		return;
@@ -29,7 +29,7 @@ void DebugRenderer::LogText(const char* format, ...)
 }
 
 //-----------------------------------------------------------------------------------------------
-void DebugRenderer::SetMoodText(const char* format, ...)
+void DebugRenderer::SetMoodText(char const* format, ...)
 {
 	if (!m_debug || !m_debug->SetMoodText)
 		return;
@@ -44,7 +44,7 @@ void DebugRenderer::SetMoodText(const char* format, ...)
 }
 
 //-----------------------------------------------------------------------------------------------
-void DebugRenderer::DrawWorldText(float x, float y, float height, Color8 color, const char* format, ...)
+void DebugRenderer::DrawWorldText(float x, float y, float height, Color8 color, char const* format, ...)
 {
 	if (!m_debug || !m_debug->QueueDrawWorldText)
 		return;
@@ -119,7 +119,7 @@ bool DebugRenderer::IsActive() const
 // High-Level Debug Views
 //-----------------------------------------------------------------------------------------------
 
-void DebugRenderer::DrawAntRoles(const Ant* ants, int maxAnts)
+void DebugRenderer::DrawAntRoles(Ant const* ants, int maxAnts)
 {
 	if (!IsActive())
 		return;
@@ -130,7 +130,7 @@ void DebugRenderer::DrawAntRoles(const Ant* ants, int maxAnts)
 			continue;
 
 		Color8 roleColor;
-		const char* roleLabel = "";
+		char const* roleLabel = "";
 
 		switch (ants[i].m_role)
 		{
@@ -156,7 +156,7 @@ void DebugRenderer::DrawAntRoles(const Ant* ants, int maxAnts)
 }
 
 //-----------------------------------------------------------------------------------------------
-void DebugRenderer::DrawFoodLocations(const GameMap& map)
+void DebugRenderer::DrawFoodLocations(GameMap const& map)
 {
 	if (!IsActive())
 		return;
@@ -177,7 +177,7 @@ void DebugRenderer::DrawFoodLocations(const GameMap& map)
 }
 
 //-----------------------------------------------------------------------------------------------
-void DebugRenderer::DrawExplorationHeat(const HeatMap& heatMap, short mapWidth)
+void DebugRenderer::DrawExplorationHeat(HeatMap const& heatMap, short mapWidth)
 {
 	if (!IsActive())
 		return;

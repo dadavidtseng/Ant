@@ -14,12 +14,12 @@ AntManager::AntManager()
 // State Sync
 //-----------------------------------------------------------------------------------------------
 
-void AntManager::UpdateFromTurnState(const ArenaTurnStateForPlayer& state)
+void AntManager::UpdateFromTurnState(ArenaTurnStateForPlayer const& state)
 {
 	// Process agent reports
 	for (int i = 0; i < state.numReports; ++i)
 	{
-		const AgentReport& report = state.agentReports[i];
+		AgentReport const& report = state.agentReports[i];
 
 		if (report.result == AGENT_WAS_CREATED)
 		{
@@ -90,7 +90,7 @@ Ant* AntManager::FindAnt(AgentID id)
 	return (slot >= 0) ? &m_ants[slot] : nullptr;
 }
 
-const Ant* AntManager::FindAnt(AgentID id) const
+Ant const* AntManager::FindAnt(AgentID id) const
 {
 	int slot = FindSlotByID(id);
 	return (slot >= 0) ? &m_ants[slot] : nullptr;
@@ -117,7 +117,7 @@ int AntManager::GetCountByType(eAgentType type) const
 	return count;
 }
 
-int AntManager::GetTotalUpkeep(const AgentTypeInfo agentTypeInfos[NUM_AGENT_TYPES]) const
+int AntManager::GetTotalUpkeep(AgentTypeInfo const agentTypeInfos[NUM_AGENT_TYPES]) const
 {
 	int total = 0;
 	for (int i = 0; i < MAX_AGENTS_PER_PLAYER; ++i)
@@ -156,7 +156,7 @@ int AntManager::FindFreeSlot() const
 // Order Generation
 //-----------------------------------------------------------------------------------------------
 
-void AntManager::GenerateAllOrders(const GameMap& map, const Colony& colony, PlayerTurnOrders* out)
+void AntManager::GenerateAllOrders(GameMap const& map, Colony const& colony, PlayerTurnOrders* out)
 {
 	out->numberOfOrders = 0;
 
@@ -177,7 +177,7 @@ void AntManager::GenerateAllOrders(const GameMap& map, const Colony& colony, Pla
 // Role Assignment
 //-----------------------------------------------------------------------------------------------
 
-void AntManager::AssignRoles(const GameMap& map, int currentNutrients, const MatchInfo& matchInfo)
+void AntManager::AssignRoles(GameMap const& map, int currentNutrients, MatchInfo const& matchInfo)
 {
 	AssignQueenRoles(currentNutrients, matchInfo);
 	AssignScoutRoles(map);
@@ -186,7 +186,7 @@ void AntManager::AssignRoles(const GameMap& map, int currentNutrients, const Mat
 }
 
 //-----------------------------------------------------------------------------------------------
-void AntManager::AssignQueenRoles(int nutrients, const MatchInfo& matchInfo)
+void AntManager::AssignQueenRoles(int nutrients, MatchInfo const& matchInfo)
 {
 	(void)nutrients;
 	(void)matchInfo;
@@ -199,7 +199,7 @@ void AntManager::AssignQueenRoles(int nutrients, const MatchInfo& matchInfo)
 }
 
 //-----------------------------------------------------------------------------------------------
-void AntManager::AssignScoutRoles(const GameMap& map)
+void AntManager::AssignScoutRoles(GameMap const& map)
 {
 	ForEachLivingAntOfType(AGENT_TYPE_SCOUT, [&map](Ant& ant)
 	{
@@ -216,7 +216,7 @@ void AntManager::AssignScoutRoles(const GameMap& map)
 }
 
 //-----------------------------------------------------------------------------------------------
-void AntManager::AssignWorkerRoles(const GameMap& map, int nutrients, const MatchInfo& matchInfo)
+void AntManager::AssignWorkerRoles(GameMap const& map, int nutrients, MatchInfo const& matchInfo)
 {
 	(void)nutrients;
 	(void)matchInfo;
@@ -269,7 +269,7 @@ void AntManager::AssignWorkerRoles(const GameMap& map, int nutrients, const Matc
 }
 
 //-----------------------------------------------------------------------------------------------
-void AntManager::AssignSoldierRoles(const GameMap& map)
+void AntManager::AssignSoldierRoles(GameMap const& map)
 {
 	(void)map;
 

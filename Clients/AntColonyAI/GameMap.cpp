@@ -11,7 +11,7 @@ GameMap::GameMap()
 }
 
 //-----------------------------------------------------------------------------------------------
-void GameMap::Initialize(short mapWidth, const AgentTypeInfo agentTypeInfos[NUM_AGENT_TYPES])
+void GameMap::Initialize(short mapWidth, AgentTypeInfo const agentTypeInfos[NUM_AGENT_TYPES])
 {
 	m_width = mapWidth;
 	memcpy(m_agentTypeInfos, agentTypeInfos, sizeof(AgentTypeInfo) * NUM_AGENT_TYPES);
@@ -32,8 +32,8 @@ void GameMap::Initialize(short mapWidth, const AgentTypeInfo agentTypeInfos[NUM_
 //-----------------------------------------------------------------------------------------------
 
 void GameMap::UpdateFromObservation(
-	const eTileType observedTiles[MAX_ARENA_TILES],
-	const bool tilesThatHaveFood[MAX_ARENA_TILES],
+	eTileType const observedTiles[MAX_ARENA_TILES],
+	bool const tilesThatHaveFood[MAX_ARENA_TILES],
 	int turnNumber)
 {
 	int totalTiles = m_width * m_width;

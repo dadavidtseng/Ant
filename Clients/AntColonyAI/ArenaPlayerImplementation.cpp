@@ -18,12 +18,12 @@ int GiveCommonInterfaceVersion()
 	return COMMON_INTERFACE_VERSION_NUMBER;
 }
 
-const char* GivePlayerName()
+char const* GivePlayerName()
 {
 	return "Formicidae";
 }
 
-const char* GiveAuthorName()
+char const* GiveAuthorName()
 {
 	return "Yu-Wei Tseng";
 }
@@ -32,13 +32,13 @@ const char* GiveAuthorName()
 // Game start & end
 //-----------------------------------------------------------------------------------------------
 
-void PreGameStartup(const StartupInfo& info)
+void PreGameStartup(StartupInfo const& info)
 {
 	g_isQuitting = false;
 	g_colony = new Colony(info);
 }
 
-void PostGameShutdown(const MatchResults& results)
+void PostGameShutdown(MatchResults const& results)
 {
 	(void)results;
 	g_isQuitting = true;
@@ -64,7 +64,7 @@ void PlayerThreadEntry(int yourThreadIdx)
 // Per-turn data exchange (EXE thread, must return sub-1ms)
 //-----------------------------------------------------------------------------------------------
 
-void ReceiveTurnState(const ArenaTurnStateForPlayer& state)
+void ReceiveTurnState(ArenaTurnStateForPlayer const& state)
 {
 	if (g_colony)
 		g_colony->OnReceiveTurnState(state);
