@@ -26,7 +26,7 @@ forceMapSeed="0"
 forceMapSize="0"
 autoPlayers="*"
 autoDebugPlayer="0"
-autoRestart="false"
+autoRestart="true"
 startLocationOverride0="-1,-1"
 
 autoMatch="Fast"
