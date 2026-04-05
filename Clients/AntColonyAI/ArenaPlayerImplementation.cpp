@@ -1,11 +1,17 @@
-#include "../../Arena/Code/Game/ArenaPlayerInterface.hpp"
+#include "Colony.hpp"
 
-#include<atomic>
+//-----------------------------------------------------------------------------------------------
+// ArenaPlayerImplementation.cpp
+//
+// Thin DLL export layer. No AI logic — only delegates to Colony.
+//-----------------------------------------------------------------------------------------------
 
-std::atomic<bool> g_isQuitting = false;
-char const* COLONY_NAME = "DEFAULT NAME";
-char const* AUTHOR_NAME = "DEFAULT AUTHOR";
-DebugInterface const* g_debug = nullptr;
+static Colony*            g_colony    = nullptr;
+static std::atomic<bool>  g_isQuitting = false;
+
+//-----------------------------------------------------------------------------------------------
+// Pre-game player information
+//-----------------------------------------------------------------------------------------------
 
 int GiveCommonInterfaceVersion()
 {
@@ -14,54 +20,60 @@ int GiveCommonInterfaceVersion()
 
 const char* GivePlayerName()
 {
-	return COLONY_NAME;
+	return "Formicidae";
 }
 
 const char* GiveAuthorName()
 {
-	return AUTHOR_NAME;
+	return "Yu-Wei Tseng";
 }
+
+//-----------------------------------------------------------------------------------------------
+// Game start & end
+//-----------------------------------------------------------------------------------------------
 
 void PreGameStartup(const StartupInfo& info)
 {
-	g_debug = info.debugInterface;
+	g_isQuitting = false;
+	g_colony = new Colony(info);
 }
 
 void PostGameShutdown(const MatchResults& results)
 {
+	(void)results;
 	g_isQuitting = true;
-}
 
-void PlayerThreadEntry(int yourThreadIdx)
-{
-	if (yourThreadIdx != 0)
-		return;	//#TODO: actually use other threads later.
-
-	while (!g_isQuitting)
+	if (g_colony)
 	{
-		float mouseX, mouseY;
-		g_debug->GetMouseWorldPos(mouseX, mouseY);
-		bool isMouseButtonDown = g_debug->IsKeyDown("LMB");
-		bool isSpaceDown = g_debug->IsKeyDown("Space");
-		int score = (10 * isMouseButtonDown) + (1 * isSpaceDown);
-		if (isSpaceDown)
-		{
-			g_debug->RequestPause();
-		}
-		g_debug->IsKeyDown("ESC");
-		g_debug->SetMoodText("Mouse is at (%.2f, %.2f), score=%i", mouseX, mouseY, score);
-		g_debug->LogText("PreGameStartup");
-		g_debug->QueueDrawWorldText(mouseX, mouseY, 0.5f, 0.5f, 5.f, Color8(255, 255, 0,100), "SCORE: %i", score);
-		g_debug->FlushQueuedDraws();			
+		delete g_colony;
+		g_colony = nullptr;
 	}
 }
 
+//-----------------------------------------------------------------------------------------------
+// Worker thread entry
+//-----------------------------------------------------------------------------------------------
+
+void PlayerThreadEntry(int yourThreadIdx)
+{
+	if (g_colony)
+		g_colony->WorkerLoop(yourThreadIdx, &g_isQuitting);
+}
+
+//-----------------------------------------------------------------------------------------------
+// Per-turn data exchange (EXE thread, must return sub-1ms)
+//-----------------------------------------------------------------------------------------------
+
 void ReceiveTurnState(const ArenaTurnStateForPlayer& state)
 {
-
+	if (g_colony)
+		g_colony->OnReceiveTurnState(state);
 }
 
 bool TurnOrderRequest(int turnNumber, PlayerTurnOrders* out_ordersToFill)
-{ 
-	return false;
+{
+	if (!g_colony)
+		return false;
+
+	return g_colony->OnTurnOrderRequest(turnNumber, out_ordersToFill);
 }
